@@ -25,6 +25,27 @@ def test_get_raises():
         tasks.get(task_id='123')
 
 
+class TestUpdate():
+    """Test expected exceptions with tasks.update()."""
+
+    def test_bad_id(self):
+        """A non-int id should raise an excption."""
+        with pytest.raises(TypeError):
+            tasks.update(task_id={'dict instead': 1},
+                         task=tasks.Task())
+
+    def test_bad_task(self):
+        """A non-Task task should raise an excption."""
+        with pytest.raises(TypeError):
+            tasks.update(task_id=1, task='not a task')
+
+
+def test_delete_raises():
+    """delete() should raise an exception with wrong type param."""
+    with pytest.raises(TypeError):
+        tasks.delete(task_id=(1, 2, 3))
+
+
 def test_start_tasks_db_raises():
     """Make sure unsupported db raises an exception."""
     with pytest.raises(ValueError) as excinfo:
