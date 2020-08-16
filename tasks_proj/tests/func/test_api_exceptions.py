@@ -10,6 +10,21 @@ def test_add_raises():
         tasks.add(task='not a Task object')
 
 
+@pytest.mark.smoke
+def test_list_tasks_raises():
+    """list_tasks() should raise an exception with wrong type param."""
+    with pytest.raises(TypeError):
+        tasks.list_tasks(owner=123)
+
+
+@pytest.mark.get
+@pytest.mark.smoke
+def test_get_raises():
+    """get() should raise an exception with wrong type param."""
+    with pytest.raises(TypeError):
+        tasks.get(task_id='123')
+
+
 def test_start_tasks_db_raises():
     """Make sure unsupported db raises an exception."""
     with pytest.raises(ValueError) as excinfo:
